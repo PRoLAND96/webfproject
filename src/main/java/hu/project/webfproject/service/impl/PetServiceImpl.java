@@ -5,6 +5,7 @@ import hu.project.webfproject.entities.Pet;
 import hu.project.webfproject.repository.PetRepository;
 import hu.project.webfproject.service.PetService;
 import hu.project.webfproject.utils.PetMapper;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,6 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public void deletePet(PetDTO pet) {
-        petRepository.deleteById(pet.getId());
+        petRepository.deleteById(pet.getPetDtoId());
     }
 }
