@@ -9,7 +9,7 @@ public interface PetService {
 
     List<Pet> getAllPets();
 
-    void savePet();
+    void savePet(Pet pet);
 
-    void deletePet();
+    void deletePet(Pet pet);
 }

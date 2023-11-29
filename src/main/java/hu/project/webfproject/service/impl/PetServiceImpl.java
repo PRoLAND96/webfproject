@@ -12,20 +12,20 @@ import java.util.List;
 public class PetServiceImpl implements PetService {
 
     @Autowired
-    PetRepository dogRepository;
+    PetRepository petRepository;
 
     @Override
     public List<Pet> getAllPets() {
-        return null;
+        return petRepository.findAll();
     }
 
     @Override
-    public void savePet() {
-
+    public void savePet(Pet pet) {
+        petRepository.save(pet);
     }
 
     @Override
-    public void deletePet() {
-
+    public void deletePet(Pet pet) {
+        petRepository.delete(pet);
     }
 }
