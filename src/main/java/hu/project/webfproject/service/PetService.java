@@ -1,15 +1,15 @@
 package hu.project.webfproject.service;
 
-
+import hu.project.webfproject.dto.PetDTO;
 import hu.project.webfproject.entities.Pet;
 
 import java.util.List;
 
 public interface PetService {
 
-    List<Pet> getAllPets();
+    List<PetDTO> getAllPets();
 
-    void savePet(Pet pet);
+    void savePet(PetDTO pet);
 
-    void deletePet(Pet pet);
+    void deletePet(PetDTO pet);
 }
