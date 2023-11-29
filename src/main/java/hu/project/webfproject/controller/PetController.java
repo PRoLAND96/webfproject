@@ -2,8 +2,10 @@ package hu.project.webfproject.controller;
 
 import hu.project.webfproject.dto.PetDTO;
 import hu.project.webfproject.dto.OwnerDTO;
+import hu.project.webfproject.entities.Owner;
 import hu.project.webfproject.entities.Pet;
 import hu.project.webfproject.service.PetService;
+import hu.project.webfproject.utils.OwnerMapper;
 import hu.project.webfproject.utils.PetMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
@@ -22,6 +24,9 @@ public class PetController {
 
     @Autowired
     private PetMapper petMapper;
+
+    @Autowired
+    private OwnerMapper ownerMapper;
 
     private String actionLabel;
 
@@ -44,7 +49,8 @@ public class PetController {
         this.setActionLabel("Add");
     }
     public void savePet(){
-
+        Owner newOwner = ownerMapper.OwnerDtoToOwner(this.ownerDTO);
+        petDTO.setPetOwner(newOwner);
         petService.savePet(this.petDTO);
         getAllPets();
     }
@@ -54,6 +60,9 @@ public class PetController {
         getAllPets();
     }
 
+    public void updatePet(PetDTO toBeUpdated){
+
+    }
     public PetService getPetService() {
         return petService;
     }

@@ -11,13 +11,13 @@ public class PetDTO implements Serializable {
 
     private Long petDtoId;
 
-    private String name;
+    private String petName;
 
-    private Character gender;
+    private Character petGender;
 
-    private String race;
+    private String petRace;
 
-    private OwnerDTO owner;
+    private OwnerDTO petOwner;
 
     public Long getPetDtoId() {
         return petDtoId;
@@ -27,35 +27,35 @@ public class PetDTO implements Serializable {
         this.petDtoId = petDtoId;
     }
 
-    public String getName() {
-        return name;
+    public String getPetName() {
+        return petName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPetName(String petName) {
+        this.petName = petName;
     }
 
-    public Character getGender() {
-        return gender;
+    public Character getPetGender() {
+        return petGender;
     }
 
-    public void setGender(Character gender) {
-        this.gender = gender;
+    public void setPetGender(Character petGender) {
+        this.petGender = petGender;
     }
 
-    public String getRace() {
-        return race;
+    public String getPetRace() {
+        return petRace;
     }
 
-    public void setRace(String race) {
-        this.race = race;
+    public void setPetRace(String petRace) {
+        this.petRace = petRace;
     }
 
-    public OwnerDTO getOwner() {
-        return owner;
+    public OwnerDTO getPetOwner() {
+        return petOwner;
     }
 
-    public void setOwner(OwnerDTO owner) {
-        this.owner = owner;
+    public void setPetOwner(Owner petOwner) {
+        this.petOwner = petOwner;
     }
 }

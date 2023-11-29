@@ -29,7 +29,10 @@
                     <p:inputText id="gender" size="40"
                                  value="#{petController.petDTO.petGender}" required="true"
                                  requiredMessage="Please enter pet name! "/>
-
+                    <p:outputLabel for="owner" value="ID of Owner: "/>
+                    <p:inputText id="owner" size="40"
+                                 value="#{petController.ownerDTO.id}" required="true"
+                                 requiredMessage="Please enter pet owner! "/>
                     <p:commandButton value="#{petController.actionLabel}"
                                      action="#{petController.savePet()}" update="petList petInfoPnl">
                     </p:commandButton>
@@ -46,10 +49,13 @@
                     <p:column headerText="Name">
                         <h:outputText value="#{pet.petName}"/>
                     </p:column>
+                    <p:column headerText="Owner">
+                        <h:outputText value="#{pet.petOwner.name}"/>
+                    </p:column>
                     <p:column id="action">
                         <f:facet name="header">Action</f:facet>
                         <h:commandLink value="Edit"
-                                       action="#{petController.deletePet(pet)}">
+                                       action="#{petController.updatePet(pet)}">
                             <f:ajax execute="action" render="petForm"/>
                         </h:commandLink> /
                         <h:commandLink value="Delete"
