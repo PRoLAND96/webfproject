@@ -28,7 +28,6 @@ public class PetServiceImpl implements PetService {
     @Autowired
     OwnerRepository ownerRepository;
 
-
     @Autowired
     PetMapper petMapper;
 
@@ -43,32 +42,37 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public void savePet(PetDTO pet) {
-
-        Optional<Owner> tempOwner = ownerRepository.findById(pet.getPetOwner().getId());
-        if(pet.getPetDtoId() == null){
-            Pet newPet = petMapper.PetDtoToPet(pet);
-            if (tempOwner.isPresent()) {
+    public void savePet(PetDTO petToBeSaved) {
+        Optional<Owner> tempOwner = ownerRepository.findById(petToBeSaved.getPetOwner().getId());
+        if(petToBeSaved.getPetDtoId() == null){
+            Pet newPet = petMapper.PetDtoToPet(petToBeSaved);
+            if(tempOwner.isPresent()){
                 Owner owner = tempOwner.get();
                 newPet.setOwner(owner);
                 petRepository.save(newPet);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, String.format("Owner notice %s",petToBeSaved.getPetDtoId() ), "Succesfully added new Dog!");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
             }else{
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Owner notice", "Owner with the given ID does not exist!");
                 PrimeFaces.current().dialog().showMessageDynamic(message);
             }
-        }else {
-            Optional<Pet> pet1 = petRepository.findById(pet.getPetDtoId());
+        }else{
+            Optional<Pet> pet1 = petRepository.findById(petToBeSaved.getPetDtoId());
             Pet existingPet = pet1.get();
-            if (tempOwner.isPresent()) {
-                existingPet.setOwner(pet.getPetOwner());
-                existingPet.setName(pet.getPetName());
-                existingPet.setRace(pet.getPetRace());
-                existingPet.setGender(pet.getPetGender());
+            if(tempOwner.isPresent()){
+                existingPet.setOwner(petToBeSaved.getPetOwner());
+                existingPet.setName(petToBeSaved.getPetName());
+                existingPet.setRace(petToBeSaved.getPetRace());
+                existingPet.setGender(petToBeSaved.getPetGender());
                 petRepository.save(existingPet);
-            } else {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Owner notice", "Updated existing dog!");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
+            }else{
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Owner notice", "Owner with the given ID does not exist!");
                 PrimeFaces.current().dialog().showMessageDynamic(message);
             }
+
+
         }
     }
 
@@ -76,5 +80,6 @@ public class PetServiceImpl implements PetService {
     public void deletePet(PetDTO pet) {
         petRepository.deleteById(pet.getPetDtoId());
     }
+
 
 }

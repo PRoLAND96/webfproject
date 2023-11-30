@@ -2,7 +2,6 @@ package hu.project.webfproject.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 
 import java.util.List;
 
@@ -10,20 +9,16 @@ import java.util.List;
 @Data
 public class Owner {
 
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Getter
     @Column(name = "NAME")
     private String name;
 
-    @Getter
     @Column(name = "GENDER")
     private Character gender;
 
-    @Getter
     @Column(name = "AGE")
     private Integer age;
 

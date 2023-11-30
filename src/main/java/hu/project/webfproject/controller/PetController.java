@@ -4,18 +4,18 @@ import hu.project.webfproject.dto.PetDTO;
 import hu.project.webfproject.dto.OwnerDTO;
 import hu.project.webfproject.entities.Owner;
 import hu.project.webfproject.service.PetService;
-import hu.project.webfproject.utils.OwnerMapper;
 import hu.project.webfproject.utils.PetMapper;
+import hu.project.webfproject.utils.OwnerMapper;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@ViewScoped
+@RequestScope
 public class PetController {
 
     @Autowired
@@ -39,8 +39,8 @@ public class PetController {
 
 
     @PostConstruct
-    public void getAllPets(){
-        if(!this.getPets().isEmpty()){
+    public void getAllPets() {
+        if (!this.getPets().isEmpty()) {
             this.getPets().clear();
             this.getOwners().clear();
         }
@@ -48,26 +48,29 @@ public class PetController {
         this.setActionLabel("Add");
         getPetDTO();
         this.petDTO.setPetDtoId(null);
+
     }
-    public void savePet(){
-        Owner newOwner = ownerMapper.OwnerDtoToOwner(this.ownerDTO);
-        petDTO.setPetOwner(newOwner);
-        petService.savePet(this.petDTO);
+
+    public void savePet() {
+        petService.savePet(this.getPetDTO());
         getAllPets();
     }
 
-    public void deletePet(PetDTO tobeDeleted){
+    public void deletePet(PetDTO tobeDeleted) {
         petService.deletePet(tobeDeleted);
         getAllPets();
     }
 
-    public void updatePet(PetDTO toBeUpdated){
-        petDTO.setPetDtoId(toBeUpdated.getPetDtoId());
-        petDTO.setPetRace(toBeUpdated.getPetRace());
-        petDTO.setPetGender(toBeUpdated.getPetGender());
-        petDTO.setPetName(toBeUpdated.getPetName());
-        petDTO.setPetOwner(toBeUpdated.getPetOwner());
+    public void updatePet(PetDTO toBeUpdated) {
+
+        this.petDTO.setPetDtoId(toBeUpdated.getPetDtoId());
+        this.petDTO.setPetRace(toBeUpdated.getPetRace());
+        this.petDTO.setPetGender(toBeUpdated.getPetGender());
+        this.petDTO.setPetName(toBeUpdated.getPetName());
+        this.petDTO.setPetOwner(toBeUpdated.getPetOwner());
+        setActionLabel("Update");
     }
+
     public PetService getPetService() {
         return petService;
     }
@@ -83,18 +86,13 @@ public class PetController {
     public void setPetMapper(PetMapper petMapper) {
         this.petMapper = petMapper;
     }
-    public List<PetDTO> getPets(){
-        if(null == pets){
-            pets = new ArrayList<PetDTO>();
-        }
-        return pets;
+
+    public OwnerMapper getOwnerMapper() {
+        return ownerMapper;
     }
 
-    public List<OwnerDTO> getOwners(){
-        if(null == owners){
-            owners = new ArrayList<OwnerDTO>();
-        }
-        return owners;
+    public void setOwnerMapper(OwnerMapper ownerMapper) {
+        this.ownerMapper = ownerMapper;
     }
 
     public String getActionLabel() {
@@ -105,8 +103,22 @@ public class PetController {
         this.actionLabel = actionLabel;
     }
 
+    public List<PetDTO> getPets() {
+        if(null == pets){
+            pets = new ArrayList<PetDTO>();
+        }
+        return pets;
+    }
+
     public void setPets(List<PetDTO> pets) {
         this.pets = pets;
+    }
+
+    public List<OwnerDTO> getOwners() {
+        if(null == owners){
+            owners = new ArrayList<OwnerDTO>();
+        }
+        return owners;
     }
 
     public void setOwners(List<OwnerDTO> owners) {
@@ -116,6 +128,7 @@ public class PetController {
     public PetDTO getPetDTO() {
         if (null == petDTO){
             petDTO = new PetDTO();
+            petDTO.setPetOwner(new Owner());
         }
         return petDTO;
     }
