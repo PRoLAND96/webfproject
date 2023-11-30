@@ -3,12 +3,11 @@ package hu.project.webfproject.controller;
 import hu.project.webfproject.dto.PetDTO;
 import hu.project.webfproject.dto.OwnerDTO;
 import hu.project.webfproject.entities.Owner;
-import hu.project.webfproject.entities.Pet;
 import hu.project.webfproject.service.PetService;
 import hu.project.webfproject.utils.OwnerMapper;
 import hu.project.webfproject.utils.PetMapper;
 import jakarta.annotation.PostConstruct;
-import lombok.Data;
+import jakarta.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@Data
+@ViewScoped
 public class PetController {
 
     @Autowired

@@ -20,7 +20,7 @@ public class Pet {
     private String race;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "OWNER_ID")
+    @JoinColumn(name = "owner_id")
     private Owner owner;
 
     public Long getId() {
