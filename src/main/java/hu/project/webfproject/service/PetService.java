@@ -12,6 +12,4 @@ public interface PetService {
     void savePet(PetDTO pet);
 
     void deletePet(PetDTO pet);
-
-    void updatePet(PetDTO pet);
 }

@@ -17,7 +17,7 @@ public class PetDTO implements Serializable {
 
     private String petRace;
 
-    private OwnerDTO petOwner;
+    private Owner petOwner;
 
     public Long getPetDtoId() {
         return petDtoId;
@@ -51,7 +51,7 @@ public class PetDTO implements Serializable {
         this.petRace = petRace;
     }
 
-    public OwnerDTO getPetOwner() {
+    public Owner getPetOwner() {
         return petOwner;
     }
 

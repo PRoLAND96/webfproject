@@ -47,6 +47,8 @@ public class PetController {
         }
         this.getPets().addAll(petService.getAllPets());
         this.setActionLabel("Add");
+        getPetDTO();
+        this.petDTO.setPetDtoId(null);
     }
     public void savePet(){
         Owner newOwner = ownerMapper.OwnerDtoToOwner(this.ownerDTO);
@@ -61,7 +63,11 @@ public class PetController {
     }
 
     public void updatePet(PetDTO toBeUpdated){
-
+        petDTO.setPetDtoId(toBeUpdated.getPetDtoId());
+        petDTO.setPetRace(toBeUpdated.getPetRace());
+        petDTO.setPetGender(toBeUpdated.getPetGender());
+        petDTO.setPetName(toBeUpdated.getPetName());
+        petDTO.setPetOwner(toBeUpdated.getPetOwner());
     }
     public PetService getPetService() {
         return petService;
